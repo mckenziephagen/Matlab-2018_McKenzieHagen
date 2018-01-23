@@ -26,7 +26,9 @@ disp(str)
 
 %%Q 2.2 
 str = 'MACARONI AND CHEESE'; 
-  
+ 
+% again, I think I wanted id1 to be a vector, not a str (see homework)
+
 id1 = str([1 2 7 9 14 15 16 17 18 19]); 
 
 id2 = str([15 17 5 9 1 8 7 12 9 8 18 9 3 15 8 7 19 18 19]); 
@@ -96,15 +98,19 @@ disp(str([6 12 18]))
 %a) 
 
 meas = [12:1.23:100]
-exp = meas(1:40)
+
+% so this is actually super-dangerous because exp is the name of a matlab
+% function. If you redefine it as a variable you will get some really
+% confusing errors.
+myexp = meas(1:40)
 
 %b) 
 
-exp(5)
+myexp(5)
 
 %c) 
-exp(end)
-exp(40)
+myexp(end)
+myexp(40)
 
 %%Q 2.6 
 

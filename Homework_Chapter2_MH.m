@@ -44,8 +44,10 @@ str = 'nosey little cook';
 
 % you get:        cosy little nook
 
-id1 = str([14 2 3 5 6 7 8 9 10 11 12 6 1 2 2 17]); 
-
+%id1 = str([14 2 3 5 6 7 8 9 10 11 12 6 1 2 2 17]); 
+% technically I asked for id1 to be a vector
+id1 = [14 2 3 5 6 7 8 9 10 11 12 6 1 2 2 17];
+disp(str(id1))
 % (Hint, write the phrase "nosey little cook" on a piece of paper and number each letter)
  
 %% Q 2.3: Creating vectors.
@@ -81,9 +83,19 @@ str(8)
 % d) Flip str so it is backwards (‘zxpzxpzxpzxpzrrrxpzx’). Hint (use 2.3c)
 str([20:-1:1])
 % e) Demonstrate that the 6th, 13th and 17th letters in the reversed string are ‘pzx’.
-str(6)
-str(13)
-str(17)
+% str(6)
+% str(13)
+% str(17)
+
+% so, the above isn't using the reversed string
+str_rev=str([20:-1:1]);
+str_rev([ 6 13 17])
+
+% or if you wanted to be fancy-pants, but this really would be
+% unnecessarily complicated
+str([end+1]-[ 6 13 17])
+
+
 %% Q 2.5: Indexing into vectors
  
 % You ran an experiment where you took 20 measurements every 2.36 seconds starting 1.2 seconds into the experiment.
