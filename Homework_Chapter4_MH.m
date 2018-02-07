@@ -1,8 +1,9 @@
 %% Homework Chapter 4
-%% Done by MH, Due Jan 231 9A 
+%% Done by MH, Due Feb 9A 
 
-%%return to mat7 
- 
+%Mat7 unfinished 
+%could not figure out how to do 4.2 c with a for loop 
+
 %% Q 4.1: Making matrices
  
 % Create the following matrices without typing in the numbers by hand:
@@ -38,7 +39,7 @@ mat3=[4     3     2     1     0; ...
 
 mat3 = zeros(5)
 for i = 1:5
-    mat4(i, :) = [4 3 2 1 0] + ((i-1)*5)
+    mat3(i, :) = [4 3 2 1 0] + ((i-1)*5)
 end 
  
 
@@ -75,21 +76,27 @@ for i = 1:4
     mat6(i, :) = (i-1) * 10
 end 
 
-mat7=[0     1     0     1     0; ...
-     1     0     1     0     1; ...
-     0     1     0     1     0; ...
-     1     0     1     0     1];
- 
- mat7 = zeros(4, 5)
- for i = 1:4
-     for j = 1:5 
-         mat7(i, j) = 
- 
+%this one is wrong 
+% mat7=[0     1     0     1     0; ...
+%      1     0     1     0     1; ...
+%      0     1     0     1     0; ...
+%      1     0     1     0     1];
+%  
+%  mat7 = zeros(4, 5) 
+%  
+% for i = 1:2:5
+%       mat7(i,:) = (i)+1
+%     for j = 1:2:4
+%     mat7(:, j) = (j) + 1
+%     end 
+% end 
+%              
+%  
  
 
  
 %% Q 4.2: Indexing, matrices, length and for
-You run an experiment and the data is collected into 
+% You run an experiment and the data is collected into 
 % the following 3D matrix
 
 mat(:,:,1) = [9    16    16    18     4; ...
@@ -102,6 +109,8 @@ mat(:,:,2) = [17     5     9     9    12; ...
      5     6    18     5    12; ...
      3    18    20     8    14];
 
+
+ 
 % The rows represent repeated measurements, 
 % the columns represent subjects, 
 % and the 3rd dimension represents whether the subject 
@@ -113,9 +122,9 @@ mat(:,:,2) = [17     5     9     9    12; ...
 % equal to 15.
 
 [rr, cc, tt]= find(mat==15 | mat > 15); 
-[rr, cc, tt] 
+[rr, cc, tt];
 n = numel([rr, cc, tt])/3
-doc count
+
 
 
 % b) Find out how many scores greater or equal to 15 
@@ -127,12 +136,12 @@ n = numel ([rr, cc])/2
 
 
 %c) Set all the values less than or equal to 4 to NaN.
-
-
-for mat==4 | mat<4
-    mat(:, :, :) = NaN
-    end 
-end 
+%%how to do this with a for loop? -could not figure out the for loop 
+mat(1, 5, 1) = NaN
+mat(2, 1, 2) =NaN
+mat(2, 3, 2) = NaN
+mat(2, 4, 2) = NaN
+mat(4, 1, 2)= NaN
 
 
 % d) Calculate the mean for each subject 
@@ -140,27 +149,60 @@ end
 % If you feel very brave do it without using nonanmean from 
 % the github account
 
+%was working last night, but it no longer works  
+
+for i = 1:5 
+mean(mat(i, :, :)) 
+end
+
 
 % e) write a script where you go through each column 
 % (subject) of data, and display for each subject
 %       (i) how many NaN there are in that subject’s data, and
 %       (ii) how many values there are that are greater or equal to 15.
 
+for i = 1:5
+    sum(isnan(mat(:, i, :)))
+end 
+
+
 %% Q 4.3: Logical operations, mod.
 
 % Write a script so that if x is:
-
  % 0, 2, 4, 6  … etc.  
  % The script prints “x is an even integer”
 
+x = 2 
+if mod(x, 2) == 0
+  disp 'x is an even integer'
+else 
+  disp 'x is an odd integer' 
+end
 % 1 3 5 7  … etc.  
 % The script prints “x is an odd integer”
-
+if mod(x, 2) == 0
+  disp 'x is an even integer'
+else 
+  disp 'x is an odd integer' 
+end
 % A positive non-integer (e.g. 3.2)
  % the script prints “x is a positive non-integer”
+ 
+ if isinteger(x)== 1 || x > 0 
+    disp 'x is a positive non-integer' 
+ else 
+     disp 'x is not a postive non-integer' 
+ end 
 
 % A negative non-integer (e.g. -2.2) 
 % the script prints “x is a negative non-integer”
+
+ 
+ if isinteger(x)== 1 || x < 0 
+    disp 'x is a negative non-integer' 
+ else 
+     disp 'x is not a negative non-integer'
+ end 
 
 %% Q 4.4: While
 
@@ -168,36 +210,45 @@ end
 % displays the sum of the four dice. 
 % The program should count the number of rolls until
 % the sum of the four dice is equal to 20.
+clear
+count = 1 
+roll = round(rand(1,4)*6); 
+while sum(roll) ~= 20;
+    count = count +1 ;
+    roll = round(rand(1,4)*6); 
+end 
+disp (['summed it to 20 in' num2str(count), ' rolls'])
+    
 
 %% and for the brave among you (xtra credit)
 
-clear all
-
-nsub=20;
-% generate a random group of men and women
-men=69+randn(nsub, 1)*3;
-women=66+randn(nsub, 1)*3;
-% calculate the real difference between them
-realdiff=mean(men)-mean(women);
-% throw all heights into a cauldron.
-
-all=[men ;women];
-
-% calculated the expected distribution of differences in means between men and women with a sample of 20 
-% if there was no genuine height difference
-for r=1:1000
-    % stir the cauldron
-    all=shuffle(all);
-    % assume first 20 are men, second 20 are women
-    m_men(r)=mean(all(1:nsub));
-    m_women(r)=mean(all(nsub+1:end));
-    m_diff(r)=m_men(r)-m_women(r);
-end
-
-% Modify the code to find out whether the height difference between men and women would be significant 
-% with 10 individuals, 20, 100. (in matlab the command is ttest).
-
-% in a group of 100 individuals, of whom 50 were male, 50 female. 
-% How many of the 50 tallest people would be female?
-
- 	 
+% clear all
+% 
+% nsub=20;
+% % generate a random group of men and women
+% men=69+randn(nsub, 1)*3;
+% women=66+randn(nsub, 1)*3;
+% % calculate the real difference between them
+% realdiff=mean(men)-mean(women);
+% % throw all heights into a cauldron.
+% 
+% all=[men ;women];
+% 
+% % calculated the expected distribution of differences in means between men and women with a sample of 20 
+% % if there was no genuine height difference
+% for r=1:1000
+%     % stir the cauldron
+%     all=shuffle(all);
+%     % assume first 20 are men, second 20 are women
+%     m_men(r)=mean(all(1:nsub));
+%     m_women(r)=mean(all(nsub+1:end));
+%     m_diff(r)=m_men(r)-m_women(r);
+% end
+% 
+% % Modify the code to find out whether the height difference between men and women would be significant 
+% % with 10 individuals, 20, 100. (in matlab the command is ttest).
+% 
+% % in a group of 100 individuals, of whom 50 were male, 50 female. 
+% % How many of the 50 tallest people would be female?
+% 
+%  	 
