@@ -191,17 +191,33 @@ end
 
 % b) Write a statement that is true if the variable 'x' is either less than 2 or greater than pi.
 x<2||x>pi
+
 % c) Write a statement that is true if either x is greater than 2 and y is less than 4, or if z is equal to zero.
 z = randn
 y = randn
 x = randn
 
 (x>2&&y<0)||z==0
+
 %% Q 4.5 While loops
 
 %Write a script that repeatedly rolls two dice using this command:
 
-while 
-roll = ceil(rand(1,2));
-rand(1,2) 
+
+roll = ceil(6*rand(1,2));
+
+roll = randi(6,2) 
+
+roll = [6 6]; 
+ct = 0; 
+while sum(roll) >2 
+    roll = randi(6,2); 
+    ct = ct + 1 
+end 
+disp(['rolled', num2str(ct), 'times'])
+
+while sum(roll) >2 
+    roll = ceil(rand(1,2)); 
+    
+
 % and counts the number of rolls until [1,1] (‘snake eyes’) comes up.
