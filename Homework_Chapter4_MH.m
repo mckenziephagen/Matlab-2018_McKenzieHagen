@@ -82,31 +82,29 @@ end
 %      0     1     0     1     0; ...
 %      1     0     1     0     1];
 %  
-%  mat7 = zeros(4, 5) 
-%  
-% for i = 1:2:5
-%       mat7(i,:) = (i)+1
-%     for j = 1:2:4
-%     mat7(:, j) = (j) + 1
-%     end 
-% end 
-%              
-%  
+mat7 = zeros(4, 5) 
+
+for i = 1:5 
+   for  j=1:5
+    mat(i,j) = mod(i+j, 2) 
+   end
+end 
+
  
 
  
 %% Q 4.2: Indexing, matrices, length and for
 % You run an experiment and the data is collected into 
 % the following 3D matrix
-
-mat(:,:,1) = [9    16    16    18     4; ...
-     6    16    11    11     6; ...
-    10    13     7    12     9; ...
+clear 
+mat(:,:,1) = [9    16    16    18     4; 
+     6    16    11    11     6; 
+    10    13     7    12     9; 
     10     8    19    12     5];
 
-mat(:,:,2) = [17     5     9     9    12; ...
-     4     9     4     2     5; ...
-     5     6    18     5    12; ...
+mat(:,:,2) = [17     5     9     9    12; 
+     4     9     4     2     5; 
+     5     6    18     5    12; 
      3    18    20     8    14];
 
 
@@ -151,9 +149,7 @@ mat(4, 1, 2)= NaN
 
 %was working last night, but it no longer works  
 
-for i = 1:5 
-mean(mat(i, :, :)) 
-end
+a = nanmean(nanmean(mat, 1), 3); 
 
 
 % e) write a script where you go through each column 
@@ -212,10 +208,10 @@ end
 % the sum of the four dice is equal to 20.
 clear
 count = 1 
-roll = round(rand(1,4)*6); 
+roll = ceil(rand(1,4)*6); 
 while sum(roll) ~= 20;
     count = count +1 ;
-    roll = round(rand(1,4)*6); 
+    roll = ceil(rand(1,4)*6); 
 end 
 disp (['summed it to 20 in' num2str(count), ' rolls'])
     
@@ -224,10 +220,10 @@ disp (['summed it to 20 in' num2str(count), ' rolls'])
 
 % clear all
 % 
-% nsub=20;
+nsub=20;
 % % generate a random group of men and women
-% men=69+randn(nsub, 1)*3;
-% women=66+randn(nsub, 1)*3;
+men=69+randn(nsub, 1)*3;
+women=66+randn(nsub, 1)*3;
 % % calculate the real difference between them
 % realdiff=mean(men)-mean(women);
 % % throw all heights into a cauldron.
