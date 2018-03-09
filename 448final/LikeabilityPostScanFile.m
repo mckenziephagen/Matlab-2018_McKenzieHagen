@@ -38,26 +38,44 @@ fclose(malefileID);
 %categorize as positive faces or neutral
 femalepositiveRating=femalefaceRating([1:4, 17:20]);
 femaleneutralRating=femalefaceRating([7:14]); 
+femaletaskRating = [femalepositiveRating; femaleneutralRating]';  
 
 malepositiveRating=malefaceRating([1:4, 17:20]);
 maleneutralRating=malefaceRating([7:14]);
+maletaskRating = [malepositiveRating; maleneutralRating]';  
 
-femaletaskRating = [femalepositiveRating; femaleneutralRating]'; 
-maletaskRating = [malepositiveRating; maleneutralRating]'; 
 
-taskRating = [femaletaskRating; maletaskRating];
+positive_rating = [femalepositiveRating(:); malepositiveRating(:)];
+neutral_rating = [femaleneutralRating(:); maleneutralRating(:)]; 
 
-%%create new .txt file with positive and neutral faces 
-    %can I get this to save into subject folder? 
+
+taskRating = [femaletaskRating; maletaskRating]; 
+
+for d=1:length(dirlist) 
+fid = fopen('taskRating.txt', 'w') ; 
+for r=1:1:size(taskRating, 1) 
+fprintf(fid, '%s\t', taskRating{r, 1}) ; 
+fprintf(fid, '%s\n', taskRating{r, 2}); 
+end 
+end  
+
+%%create two new .txt file with positive and neutral faces 
+    
+
+% I want htis to be a single column of positive_rating
+
+for d=1:length(dirlist)
+    fid = fopen('neutraltaskRating.txt', 'w') ;
+    for r=1:1:size(neutral_rating, 1);
+        fprintf(fid, '%s\n', neutral_rating{r, 1}) ;
+    end
+end
 
 
 for d=1:length(dirlist)
-fid = fopen('taskRating.txt', 'w') ;
-for r=1:1:size(taskRating, 1)
-fprintf(fid, '%s\t', taskRating{r, 1}) ;
-fprintf(fid, '%s\n', taskRating{r, 2});
+    fid = fopen('positivetaskrating.txt', 'w') ;
+    for r=1:1:size(positive_rating, 1);
+        fprintf(fid, '%s\n', positive_rating{r, 1}) ;
+    end
 end
-end 
-
-
 
