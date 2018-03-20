@@ -118,8 +118,8 @@ for n = 1 : length(faces)
     [imgrect] = CenterRect(scFac * [ 0 0 faces(n).sz(2) faces(n).sz(1)], rect);
     % remember LeTeRBox, left, top, right, bottom
     Screen('DrawTexture', wPtr, texture,[], imgrect);
-    DrawFormattedText(wPtr,'Rate this face', 'center', rect(4)/4); 
-    DrawFormattedText(wPtr, '1  2  3  4  5  6  7  8  9', 'center', rect(4)*3/4);
+    DrawFormattedText(wPtr,'Rate this face', 'center', rect(4)/8); 
+    DrawFormattedText(wPtr, '1  2  3  4  5  6  7  8  9', 'center', rect(4)*7/8);
     Screen('Flip',wPtr);
     FlushEvents;
     key='x';
