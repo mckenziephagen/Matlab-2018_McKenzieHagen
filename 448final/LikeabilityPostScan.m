@@ -1,6 +1,10 @@
 %Post-scan Likeability Task for Jess 
 %also Psych 448- Matlab Wi18 final 
 
+
+% notes: subject folder 
+
+
 %read in .txt files 
 
 %homedr=uigetdir(pwd); %this will let you set your directory
@@ -34,41 +38,58 @@ fclose(malefileID);
 %categorize as positive faces or neutral
 femalepositiveRating=femalefaceRating([1:4, 17:20]);
 femaleneutralRating=femalefaceRating([7:14]); 
-femaletaskRating = [femalepositiveRating; femaleneutralRating]';  
 
 malepositiveRating=malefaceRating([1:4, 17:20]);
 maleneutralRating=malefaceRating([7:14]);
-maletaskRating = [malepositiveRating; maleneutralRating]';  
 
+femaletaskRating = [femalepositiveRating; femaleneutralRating]'; 
+maletaskRating = [malepositiveRating; maleneutralRating]'; 
 
-positive_rating = [femalepositiveRating(:); malepositiveRating(:)];
-neutral_rating = [femaleneutralRating(:); maleneutralRating(:)]; 
+taskRating = [femaletaskRating; maletaskRating];
 
-% 
-% taskRating = [femaletaskRating; maletaskRating]; 
-% 
-% for d=1:length(dirlist) 
-% fid = fopen('taskRating.txt', 'w') ; 
-% fprintf(fid, 'positive netural');
-% for r=1:1:size(taskRating, 1) 
-% fprintf(fid, '%s\t',taskRating{r, 1}) ; 
-% fprintf(fid, '%s\n', taskRating{r, 2}); 
-% end 
-% end  
+%%create new .txt file with positive and neutral faces 
+    %can I get this to save into subject folder? 
 
 
 for d=1:length(dirlist)
-    fid = fopen('neutraltaskRating.txt', 'w') ;
-    for r=1:1:size(neutral_rating, 1);
-        fprintf(fid, '%s\n', neutral_rating{r, 1}) ;
-    end
+fid = fopen('taskRating.txt', 'w') ;
+for r=1:1:size(taskRating, 1)
+fprintf(fid, '%s\t', taskRating{r, 1}) ;
+fprintf(fid, '%s\n', taskRating{r, 2});
+end
+end 
+
+
+
+sca;
+close all;
+clearvars;
+
+
+try
+    
+Screen('CloseAll');
+screens=0;
+
+[wPtr,rect]=Screen('OpenWindow',screens, 255, []);
+
+Screen('DrawText',wPtr,'warning',250,500);
+Screen('DrawText',wPtr,'your breath is very stinky',250,515);
+Screen('Flip',wPtr);
+pause(5)
+
+
+
+
+
+
+
+Screen('CloseAll');
+
+catch ME
+    Screen('CloseAll');
+    rethrow(ME);
 end
 
 
-for d=1:length(dirlist)
-    fid = fopen('positivetaskrating.txt', 'w') ;
-    for r=1:1:size(positive_rating, 1);
-        fprintf(fid, '%s\n', positive_rating{r, 1}) ;
-    end
-end
 
